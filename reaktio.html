@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <title>Reaktiopeli</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <div id="tulos-container">Tulos: <span id="tulos"></span></div>
+        <div id="nappula-container">
+            <div class="nappula" id="nappula0">H</div>
+            <div class="nappula" id="nappula1">B</div>
+            <div class="nappula" id="nappula2">C</div>
+        </div>
+
+        <div id="overlay">
+          <div id ="gameover"></div>
+          <!-- <form id ="pelaajanNimi">
+              Kerro nimesi<br>
+              <input type="text" id = "pelaajanNimi">
+              <br>
+              <button onclick="talletaNimi()">Talleta nimesi ja katso 
+                TOP10 pelaajaa</button>
+          </form> -->
+        </div>
+    </main>
+
+    <audio id = "loppuAani" src="fanfare.mp3"></audio>;
+
+    <script src="reaktio.js"></script>
+</body>
+
+</html>
