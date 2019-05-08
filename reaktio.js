@@ -31,38 +31,29 @@ var tulokset = [];
 // funktio, joka pyörittää konetta: aktivoi seuraavan nappulan ja ajastaa
 // sitä seuraavan nappulanvaihdon
 function aktivoiSeuraava(aika) {
-  // arvo seuraava aktiivinen nappula
-  //console.log("aika on " + aika);
+
   var seuraava = arvoUusi(nykyinen);
 
   if (aktiivisetNappulat.length > 9) {
     lopetaPeli();
   } else {
     aktiivisetNappulat.push(seuraava);
-    //console.log(aktiivisetNappulat);
 
     // päivitä nappuloiden värit: vanha mustaksi, uusi punaiseksi
     nappulat[nykyinen].style.backgroundColor = "black"; // vanha mustaksi
     nappulat[seuraava].style.backgroundColor = "red"; // uusi punaiseksi
 
-    // aseta uusi nykyinen nappula
     nykyinen = seuraava;
 
-    // aseta ajastin seuraavalle vaihdolle
-    // Koodaa niin, että vaihtumistahti kiihtyy koko ajan!
-    //console.log("Aktiivinen " + nykyinen);
+    // aseta ajastin seuraavalle vaihdolle, vaihtumistahti kiihtyy koko ajan!
     ajastin = setTimeout(aktivoiSeuraava, (aika * 0.99), (aika * 0.99));
   }
 }
 
 function arvoUusi(edellinen) {
-  // Tämä on vain demotarkoituksessa näin!
-  // Koodaa tämä niin, että seuraava arvotaan. Muista, että sama ei saa
-  // tulla kahta kertaa peräkkäin.
-  //var uusi = (edellinen + 1) % 3;
+
   while (true) {
     let uusi = Math.floor((Math.random() * 3));
-    //console.log("Random nro " + uusi);
     if (uusi != edellinen) {
       return uusi;
     }
@@ -70,10 +61,8 @@ function arvoUusi(edellinen) {
 }
 
 // Tätä funktiota kutsutaan aina, kun jotain nappulaa painetaan
-// Pelilogiikkasi vaatinee, että lisäät tänne jotain...
 function painallus(i) {
-  //console.log("Painallus ", i);
-  //console.log("aktiivisetNappulat taulukon koko" + aktiivisetNappulat.length);
+
   if (i === aktiivisetNappulat[0]) {
     painallustenLkm++;
     document.getElementById("tulos").innerHTML = painallustenLkm;
@@ -84,10 +73,9 @@ function painallus(i) {
 }
 
 
-// Kutsu tätä funktiota, kun peli loppuu.
-// Tämäkin tarvinnee täydennystä
+// funktiota, kun peli loppuu.
 function lopetaPeli() {
-  //console.log("funktio lopetaPeli alkaa");
+
   clearTimeout(ajastin); // pysäytä ajastin
   for (var i = 0; i < 3; i++) {
     nappulat[i].style.backgroundColor = "red"; // aseta kaikki punaisiksi
@@ -95,16 +83,15 @@ function lopetaPeli() {
     //console.log("nappula" + i);
   }
 
-  // ilmoita lopputulos
-  // Vinkki: dokumentissa on valmiina taustaelementti ja elementti
-  // lopputuloksen näyttämiseen. Aseta overlay-elementti näkyväksi
-  // ja näytä tulos gameoover-elementissä
+  // lopputulos näkyviin
   document.getElementById("overlay").style.visibility = 'visible';
   document.getElementById("gameover").innerHTML = "GAME OVER<br>" +
     "onnistuneita painalluksia<br>" + painallustenLkm;
 
   // lopetuksen äänimerkki
   let promise = document.getElementById("loppuAani").play();
+
+  // estää virheilmoituksen jos käyttäjä ei ole painanut kertaakaan ja soittaa äänen
   if (promise !== undefined) {
     promise.then(_ => {
       // Autoplay started!
@@ -116,6 +103,8 @@ function lopetaPeli() {
     //let lopetusAani = document.getElementById("loppuAani");
     //lopetusAani.play();
 
+    // TÄSTÄ ETEENPÄIN ON VIELÄ TYÖNALLA
+    
     //Kutsutaan funktiota pelin lopuksi joka tallentaa pelaajien nimet tallennaMuistiin.
     // nimiKysely();
   talletaTulos();
