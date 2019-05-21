@@ -106,16 +106,41 @@ function lopetaPeli() {
     // TÄSTÄ ETEENPÄIN ON VIELÄ TYÖNALLA
     
     //Kutsutaan funktiota pelin lopuksi joka tallentaa pelaajien nimet tallennaMuistiin.
-    // nimiKysely();
-  talletaTulos();
-  }
+  // talletaTulosSimppeli();
+}
 
-function talletaTulos() {
+function talletaTulosSimppeli() {
+    console.log("talletaTulosSimppeli funktio alkaa");
+    document.getElementById("pelaajanNimiForm").style.visibility = 'visible';
+}
+
+// jos key ei löydy localStoragesta metodi paluttaa 'null'
+
+function talletaNimi() {
+    var nimi = document.getElementById("pelaajanNimi").value;
+    var top10 = localStorage.getItem("topPelaajat");
+    console.log("top10 - " + top10);
+    console.log("painallus - " + painallustenLkm); 
+    if (top10 == null) {
+      var pelaajatPisteet = nimi.concat("," , toString(painallustenLkm));
+      console.log("pelaajatPisteet - " + pelaajatPisteet);
+      localStorage.setItem("topPelaajat", pelaajatPisteet)
+    }
+    console.log(topPelaajat);
+}
+
+
+/*
+// SEKALAISTA KAMAA - DO NOT CARE
+function talletaTulosComplex() {
+
     let top10Tulokset = [];
     let i;
     for (i = 0; i < localStorage.length; i++) {
-      top10Tulokset[i] = localStorage.key("i");
+      top10Tulokset[i] = localStorage.getItem(i);
     }
+
+    console.log(top10Tulokset);
 
     top10Tulokset.push(painallustenLkm);
     top10Tulokset.sort(function(a, b){return b - a});
@@ -124,20 +149,5 @@ function talletaTulos() {
     }
 
     for (i = 0; i < 10; i++) {
-      let name = localStorage.key(i);
-      //console.log(name + " - " + localStorage.getItem(name));
-    }
-}
-
-
-/*
-  // Tallenna nimi ja tulos selaimen muistiin. Tulosta top10 pelaajaa pisteineen.
-  function nimiKysely() {
-    //console.log("tallennaMuistiin funktio alkaa");
-    document.getElementById("pelaajanNimi").style.visibility = 'visible';
-  }
-
-  function talletaNimi() {
-    var nimi = document.getElementById("pelaajanNimi").value;
-    console.log(nimi);
-  }*/
+      localStorage.setItem(i, top10Tulokset[i]);
+    }*/
